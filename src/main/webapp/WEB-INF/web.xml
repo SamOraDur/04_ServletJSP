@@ -46,6 +46,24 @@
       <param-value>admin</param-value>
     </init-param>
   </servlet>
+       <servlet>
+    <description></description>
+    <display-name>preferenza</display-name>
+    <servlet-name>preferenza</servlet-name>
+    <servlet-class>preferenza</servlet-class>
+    <init-param>
+      <param-name>db_url</param-name>
+      <param-value>silvaricci.westeurope.cloudapp.azure.com:3306/Durante_preferenzaJSP</param-value>
+    </init-param>
+    <init-param>
+      <param-name>db_usr</param-name>
+      <param-value>admin</param-value>
+    </init-param>
+    <init-param>
+      <param-name>db_psw</param-name>
+      <param-value>admin</param-value>
+    </init-param>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>login</servlet-name>
@@ -54,6 +72,10 @@
     <servlet-mapping>
     <servlet-name>signin</servlet-name>
     <url-pattern>/signin</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>preferenza</servlet-name>
+    <url-pattern>/preferenza</url-pattern>
   </servlet-mapping>
   
   <session-config>

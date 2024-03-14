@@ -1,11 +1,9 @@
 
-import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -15,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class preferenza extends HttpServlet {
+public class signin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
-    public preferenza() {
+    public signin() {
         // TODO Auto-generated constructor stub
     }
     
@@ -48,39 +46,38 @@ public class preferenza extends HttpServlet {
     	}
 	}
 	
-	public void doGet(HttpServletRequest reqt, HttpServletResponse res) throws ServletException
+	public void doGet(HttpServletRequest reqt, HttpServletResponse res)
 	{
 		
 		
-		HttpSession sess = reqt.getSession();
+		
+		String username = reqt.getParameter("username");
+		String password = reqt.getParameter("password");
+		password = encryptPassword(password);
+		
+		String query = "INSERT INTO studente (username,password) VALUES('"+ username + "','"+ password + "')";
+		
+		try {
+			
+			ResultSet result = conn.createStatement().executeQuery(query);
+			if(result.next()) { //DA SISTEMARE HO FATTO INSERT INTO
 
-		if(sess != null) {
-			
-			String nome = reqt.getParameter("nome");
-			String cognome = reqt.getParameter("cognome");
-			String materia = reqt.getParameter("materia");
-			
-			String query = "d";
-			
-			try {
-				ResultSet result = conn.createStatement().executeQuery(query);
 				res.sendRedirect("login.html");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
+				
+			}else {
+				
+				throw new ServletException("Registrazione fallito!");
+				
 			}
 			
-		}else {
-			throw new ServletException("Sessione scaduta!");
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
-			
 		
 		
 	}
-	public void doPost(HttpServletRequest reqt, HttpServletResponse res) throws ServletException
+	public void doPost(HttpServletRequest reqt, HttpServletResponse res)
 	{
 		doGet(reqt,res);
 	}
