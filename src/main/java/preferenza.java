@@ -51,10 +51,10 @@ public class login extends HttpServlet {
 		
 		
 		
-		String username = reqt.getParameter("username");
-		String password = reqt.getParameter("password");
-		//password = encryptPassword(password);
-		
+		String nome = reqt.getParameter("nome");
+		String cognome = reqt.getParameter("cognome");
+		String materia = reqt.getParameter("materia");
+
 		String query = "SELECT username FROM studente WHERE username = '"+ username + "' AND password = '"+ password + "'";
 		
 		try {
